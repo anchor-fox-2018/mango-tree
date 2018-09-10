@@ -2,13 +2,13 @@
 
 // Release 0
 
-class MangoTree {
+class FruitTree {
 
   // Initialize a new MangoTree
   constructor (umur, tinggi, jenisBuah, jumlahBuah, status) {
     this._age = umur || 0;
     this._height = tinggi || 0;
-    this._fruitName = jenisBuah || 'Mango';
+    this._fruitName = jenisBuah || 'Any Fruit';
     this._harvested = jumlahBuah || 0;
     this._healthStatus = status || true;
     this._fruits = [];
@@ -38,9 +38,6 @@ class MangoTree {
     return this._harvested;
   }
 
-  // Get current states here
-
-  // Grow the tree
   grow () {
     this._age++;
     if (this._age < this._maxAge) {
@@ -51,33 +48,28 @@ class MangoTree {
     }
   }
 
-  // Produce some mangoes
-  produceMangoes () {
-    let buahMangga = Math.round(Math.random() * 40 + 10);
-    let totalBuah = (buahMangga > this._maxFruit) ? this._maxFruit : buahMangga;
+  produceFruits () {
+    let buah = Math.round(Math.random() * 40 + 10);
+    let totalBuah = (buah > this._maxFruit) ? this._maxFruit : buah;
     for (var i = 0; i < totalBuah; i++) {
-      let mango = new Mango();
-      if (mango.quality === 'Good') {
+      let fruit = new Fruit();
+      if (fruit.quality === 'Good') {
         this.goodQuality++;
       } else {
         this.badQuality++;
       }
-      this._fruits.push(mango);
+      this._fruits.push(fruit);
     }
   }
 
-  // Get some fruits
   harvest () {
     this._harvested = ` ${this._fruits.length} (${this.goodQuality} good, ${this.badQuality} bad)`;
     this.goodQuality = 0;
     this.badQuality = 0
     this._fruits = [];
   }
-
 }
-
-class Mango {
-  // Produce a mango
+class Fruit {
   constructor () {
     this.quality = this.random() % 2 === 0 ? 'Good': 'Bad';
   }
@@ -87,24 +79,67 @@ class Mango {
   }
 }
 
-//driver code untuk release 0
+// END FRUIT TEMPLATE
+
+class MangoTree extends FruitTree {
+  constructor() {
+    super(5, 25, 'Mango', 25, true);
+    this._maxAge = 17;
+  }
+}
+class Mango extends Fruit {
+}
+
+class AppleTree extends FruitTree {
+  constructor() {
+    super(7, 30, 'Apple', 43, true);
+    this._maxAge = 35;
+  }
+}
+class Apple extends Fruit {
+}
+
+class PearTree extends FruitTree {
+  constructor() {
+    super(2, 10, 'Pear', 3, true);
+    this._maxAge = 10;
+  }
+}
+class Pear extends Fruit {
+}
+
+//TESTCASE
 let mangoTree = new MangoTree();
 
-console.log('The tree is alive! :smile:');
+console.log(`The ${mangoTree._fruitName} tree is alive! :smile:\n`);
   do {
     mangoTree.grow();
-    mangoTree.produceMangoes();
+    mangoTree.produceFruits();
     mangoTree.harvest();
     console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height} | Fruits harvested = ${mangoTree.harvested}`)
   }
 while (mangoTree.healthStatus != false);
-console.log('The tree has met its end. :sad:');
+console.log(`\nThe ${mangoTree._fruitName} tree has met its end. :sad:\n`);
 
+// Release 2
+let appleTree = new AppleTree();
+console.log(`The ${appleTree._fruitName} tree is alive! :smile:\n`);
+  do {
+    appleTree.grow();
+    appleTree.produceFruits();
+    appleTree.harvest();
+    console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} | Fruits harvested = ${appleTree.harvested}`)
+  }
+while (appleTree.healthStatus != false);
+console.log(`\nThe ${appleTree._fruitName} tree has met its end. :sad:\n`);
 
-// // Release 1
-// class AppleTree {}
-// class Apple {}
-//
-// // Release 2
-// class FruitTree {}
-// class Fruit {}
+let pearTree = new PearTree();
+console.log(`The ${pearTree._fruitName} tree is alive! :smile:\n`);
+  do {
+    pearTree.grow();
+    pearTree.produceFruits();
+    pearTree.harvest();
+    console.log(`[Year ${pearTree.age} Report] Height = ${pearTree.height} | Fruits harvested = ${pearTree.harvested}`)
+  }
+while (pearTree.healthStatus != false);
+console.log(`\nThe ${pearTree._fruitName} tree has met its end. :sad:`);
