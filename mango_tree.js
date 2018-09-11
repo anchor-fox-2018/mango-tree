@@ -75,7 +75,6 @@ class MangoTree {
     //good bad
     for (let i = 0; i < randomizedHarvest; i++) {
       let randomized = Math.round(Math.random());
-      console.log(randomized)
 
       if (randomized === 0) {
         this._statusGood += 1;
@@ -108,7 +107,7 @@ do {
   mangoTree.produceMangoes();
   // mangoTree.Mango;
   mangoTree.harvest();
-  console.log(`[Year ${mangoTree.age}] Height = ${mangoTree.height} | Harvested = ${mangoTree.harvested} (${mangoTree._statusGood} Good, ${mangoTree._statusBad} Bad)`);
+  console.log(`[Year ${mangoTree.age}] Height = ${mangoTree.height} m | Harvested = ${mangoTree.harvested} (${mangoTree._statusGood} Good, ${mangoTree._statusBad} Bad)`);
 }
 
 while(mangoTree._age < 20);
